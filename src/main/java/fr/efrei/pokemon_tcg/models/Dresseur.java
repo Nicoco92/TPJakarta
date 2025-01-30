@@ -1,7 +1,6 @@
 package fr.efrei.pokemon_tcg.models;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,6 +16,8 @@ public class Dresseur {
 	private String prenom;
 
 	private LocalDateTime deletedAt;
+
+	private LocalDateTime dernierTirage; // Ajout pour limiter à 1 tirage par jour
 
 	@OneToMany
 	List<Pokemon> pokemonList;
@@ -59,5 +60,13 @@ public class Dresseur {
 
 	public void setPokemonList(List<Pokemon> pokemonList) {
 		this.pokemonList = pokemonList;
+	}
+
+	public LocalDateTime getDernierTirage() {
+		return dernierTirage;
+	}
+
+	public void setDernierTirage(LocalDateTime dernierTirage) {
+		this.dernierTirage = dernierTirage;
 	}
 }

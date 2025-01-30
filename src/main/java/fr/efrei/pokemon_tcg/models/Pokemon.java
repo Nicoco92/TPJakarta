@@ -17,6 +17,12 @@ public class Pokemon {
 	@Enumerated(EnumType.STRING)
 	private TypePokemon type;
 
+	private String attaque1;
+
+	private String attaque2;
+
+	private Integer rarete; // De 1 à 5 étoiles
+
 	public String getNom() {
 		return nom;
 	}
@@ -39,6 +45,30 @@ public class Pokemon {
 
 	public void setType(TypePokemon type) {
 		this.type = type;
+	}
+
+	public String getAttaque1() {
+		return attaque1;
+	}
+
+	public void setAttaque1(String attaque1) {
+		this.attaque1 = attaque1;
+	}
+
+	public String getAttaque2() {
+		return attaque2;
+	}
+
+	public void setAttaque2(String attaque2) {
+		this.attaque2 = attaque2;
+	}
+
+	public Integer getRarete() {
+		return rarete;
+	}
+
+	public void setRarete(Integer rarete) {
+		this.rarete = rarete;
 	}
 
 	public String getUuid() {
