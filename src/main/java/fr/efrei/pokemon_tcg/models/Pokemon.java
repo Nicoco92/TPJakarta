@@ -21,7 +21,7 @@ public class Pokemon {
 
 	private String attaque2;
 
-	private Integer rarete; // De 1 à 5 étoiles
+	private Integer rarete;
 
 	public String getNom() {
 		return nom;

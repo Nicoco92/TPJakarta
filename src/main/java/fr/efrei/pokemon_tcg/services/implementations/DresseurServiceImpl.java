@@ -63,7 +63,7 @@ DresseurServiceImpl implements IDresseurService {
 		dresseur.setNom(dresseurDTO.getNom());
 		dresseur.setPrenom(dresseurDTO.getPrenom());
 		dresseur.setDeletedAt(null);
-		dresseur.setPokemonList(new ArrayList<>()); // Initialisation de la liste
+		dresseur.setPokemonList(new ArrayList<>());
 		dresseurRepository.save(dresseur);
 	}
 
@@ -116,7 +116,7 @@ DresseurServiceImpl implements IDresseurService {
 		Set<Pokemon> nouvellesCartes = new HashSet<>();
 		while (nouvellesCartes.size() < 5) {
 			Pokemon pokemonAleatoire = toutesLesCartes.get(random.nextInt(toutesLesCartes.size()));
-			nouvellesCartes.add(pokemonAleatoire); // Un Set empêche les doublons
+			nouvellesCartes.add(pokemonAleatoire);
 		}
 
 
