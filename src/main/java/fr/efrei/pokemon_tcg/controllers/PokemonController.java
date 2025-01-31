@@ -23,7 +23,7 @@ public class PokemonController {
 
 	@GetMapping
 	public ResponseEntity<List<Pokemon>> getAll(@RequestParam(required = false) TypePokemon type) {
-		// SELECT * from pokemon;
+
 		return new ResponseEntity<>(pokemonService.findAll(type), HttpStatus.OK);
 	}
 

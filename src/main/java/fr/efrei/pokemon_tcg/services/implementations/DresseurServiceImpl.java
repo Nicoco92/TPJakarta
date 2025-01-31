@@ -15,7 +15,9 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
-public class DresseurServiceImpl implements IDresseurService {
+public class
+
+DresseurServiceImpl implements IDresseurService {
 
 	private final DresseurRepository dresseurRepository;
 	private final PokemonRepository pokemonRepository;
@@ -88,7 +90,7 @@ public class DresseurServiceImpl implements IDresseurService {
 		return true;
 	}
 
-	// 🔹 Méthode pour tirer 5 cartes Pokémon (corrigée pour éviter les doublons)
+
 	@Override
 	public List<Pokemon> tirerCartes(String dresseurUuid) {
 		Dresseur dresseur = findById(dresseurUuid);
@@ -98,31 +100,31 @@ public class DresseurServiceImpl implements IDresseurService {
 			throw new RuntimeException("Dresseur introuvable !");
 		}
 
-		// Vérification du dernier tirage
+
 		if (dresseur.getDernierTirage() != null &&
 				dresseur.getDernierTirage().toLocalDate().isEqual(LocalDate.now())) {
 			throw new RuntimeException("Vous avez déjà tiré des cartes aujourd’hui !");
 		}
 
-		// Récupérer toutes les cartes disponibles
+
 		List<Pokemon> toutesLesCartes = pokemonRepository.findAll();
 		if (toutesLesCartes.isEmpty()) {
 			throw new RuntimeException("Aucune carte disponible en base !");
 		}
 
-		// Tirer 5 cartes uniques
+
 		Set<Pokemon> nouvellesCartes = new HashSet<>();
 		while (nouvellesCartes.size() < 5) {
 			Pokemon pokemonAleatoire = toutesLesCartes.get(random.nextInt(toutesLesCartes.size()));
 			nouvellesCartes.add(pokemonAleatoire); // Un Set empêche les doublons
 		}
 
-		// Vérifier si la liste est null
+
 		if (dresseur.getPokemonList() == null) {
 			dresseur.setPokemonList(new ArrayList<>());
 		}
 
-		// Ajout des cartes et mise à jour du tirage
+
 		dresseur.getPokemonList().addAll(nouvellesCartes);
 		dresseur.setDernierTirage(LocalDateTime.now());
 		dresseurRepository.save(dresseur);
@@ -130,7 +132,7 @@ public class DresseurServiceImpl implements IDresseurService {
 		return new ArrayList<>(nouvellesCartes);
 	}
 
-	// 🔹 Génération d'un Pokémon aléatoire (corrigée)
+
 	private Pokemon genererCarteAleatoire() {
 		List<Pokemon> toutesLesCartes = pokemonRepository.findAll();
 		if (toutesLesCartes.isEmpty()) {

@@ -16,6 +16,6 @@ public interface IDresseurService {
 	boolean delete(String uuid);
 	void capturerPokemon(String uuid, CapturePokemon capturePokemon);
 
-	// Ajout de la méthode pour tirer les cartes
+
 	List<Pokemon> tirerCartes(String dresseurUuid);
 }
