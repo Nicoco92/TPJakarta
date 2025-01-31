@@ -20,9 +20,9 @@ public class Pokemon {
 	private String attaque2;
 	private Integer rarete;
 
-	private boolean estTire = false; // ✅ Ajout du champ pour savoir si le Pokémon a déjà été tiré
+	private boolean estTire = false;
 
-	// Getters et Setters
+
 	public String getUuid() {
 		return uuid;
 	}

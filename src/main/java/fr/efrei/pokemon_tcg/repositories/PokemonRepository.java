@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface PokemonRepository extends JpaRepository<Pokemon, String> {
 
-	List<Pokemon> findAllByEstTireFalse(); // ✅ Récupère uniquement les Pokémon non tirés
-	List<Pokemon> findAllByType(TypePokemon type); // ✅ Ajout de la recherche par type
+	List<Pokemon> findAllByEstTireFalse();
+	List<Pokemon> findAllByType(TypePokemon type);
 }

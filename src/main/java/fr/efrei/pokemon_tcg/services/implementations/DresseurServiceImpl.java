@@ -161,7 +161,7 @@ public class DresseurServiceImpl implements IDresseurService {
 		while (nouvellesCartes.size() < 5 && !pokemonsDisponibles.isEmpty()) {
 			Pokemon pokemonAleatoire = pokemonsDisponibles.get(random.nextInt(pokemonsDisponibles.size()));
 
-			// ✅ Marquer le Pokémon comme tiré et le sauvegarder
+
 			pokemonAleatoire.setEstTire(true);
 			pokemonRepository.save(pokemonAleatoire);
 
