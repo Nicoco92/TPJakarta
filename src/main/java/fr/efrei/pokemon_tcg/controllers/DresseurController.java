@@ -22,46 +22,17 @@ public class DresseurController {
 		this.dresseurService = dresseurService;
 	}
 
-	// Récupérer tous les dresseurs
 	@GetMapping
 	public ResponseEntity<List<Dresseur>> findAll() {
 		return new ResponseEntity<>(dresseurService.findAll(), HttpStatus.OK);
 	}
 
-	// Créer un nouveau dresseur
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody DresseurDTO dresseurDTO) {
 		dresseurService.create(dresseurDTO);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	// Supprimer un dresseur (soft delete)
-	@DeleteMapping("/{uuid}")
-	public ResponseEntity<?> delete(@PathVariable String uuid) {
-		boolean deleted = dresseurService.delete(uuid);
-		if (!deleted) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
-
-	// Capturer un Pokémon
-	@PatchMapping("/{uuid}/capturer")
-	public ResponseEntity<?> capturer(
-			@PathVariable String uuid,
-			@RequestBody CapturePokemon capturePokemon
-	) {
-		dresseurService.capturerPokemon(uuid, capturePokemon);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
-
-	// Acheter un objet (future implémentation)
-	@PatchMapping("/{uuid}/acheter")
-	public ResponseEntity<?> acheter() {
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
-
-	// Tirer un lot de 5 cartes Pokémon
 	@PatchMapping("/{uuid}/tirer")
 	public ResponseEntity<List<Pokemon>> tirerCartes(@PathVariable String uuid) {
 		try {
