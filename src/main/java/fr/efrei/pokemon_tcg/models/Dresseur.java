@@ -3,6 +3,7 @@ package fr.efrei.pokemon_tcg.models;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 public class Dresseur {
@@ -12,15 +13,15 @@ public class Dresseur {
 	private String uuid;
 
 	private String nom;
-
 	private String prenom;
-
 	private LocalDateTime deletedAt;
-
-	private LocalDateTime dernierTirage; // Ajout pour limiter à 1 tirage par jour
+	private LocalDateTime dernierTirage;
 
 	@OneToMany
-	List<Pokemon> pokemonList;
+	private List<Pokemon> pokemonList;
+
+	@ElementCollection
+	private Map<String, LocalDateTime> dernierEchangeAvec; // Stocke la date du dernier échange par dresseur UUID
 
 	public String getUuid() {
 		return uuid;
@@ -68,5 +69,13 @@ public class Dresseur {
 
 	public void setDernierTirage(LocalDateTime dernierTirage) {
 		this.dernierTirage = dernierTirage;
+	}
+
+	public Map<String, LocalDateTime> getDernierEchangeAvec() {
+		return dernierEchangeAvec;
+	}
+
+	public void setDernierEchangeAvec(Map<String, LocalDateTime> dernierEchangeAvec) {
+		this.dernierEchangeAvec = dernierEchangeAvec;
 	}
 }
