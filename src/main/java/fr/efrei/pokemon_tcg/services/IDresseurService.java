@@ -16,6 +16,5 @@ public interface IDresseurService {
 	void capturerPokemon(String uuid, CapturePokemon capturePokemon);
 	List<Pokemon> tirerCartes(String dresseurUuid);
 
-	// ✅ Ajout de cette méthode pour éviter l'erreur Overri
 	boolean echangerCartes(String dresseur1Uuid, String dresseur2Uuid, String carte1Uuid, String carte2Uuid);
 }
