@@ -25,6 +25,7 @@ public class DresseurServiceImpl implements IDresseurService {
 	private final IPokemonService pokemonService;
 	private final EchangeRepository echangeRepository;
 	private final Random random = new Random();
+	private LocalDate dateDerniereReinitialisation = LocalDate.now();
 
 	public DresseurServiceImpl(DresseurRepository dresseurRepository, PokemonRepository pokemonRepository,
 							   IPokemonService pokemonService, EchangeRepository echangeRepository) {
@@ -152,7 +153,13 @@ public class DresseurServiceImpl implements IDresseurService {
 			throw new RuntimeException("Vous avez déjà tiré des cartes aujourd’hui !");
 		}
 
-		List<Pokemon> pokemonsDisponibles = pokemonRepository.findAllByEstTireFalse(); // ✅ Récupérer seulement les Pokémon non tirés
+		// ✅ Réinitialiser les Pokémon s'ils ont tous été tirés ou si la date a changé
+		if (pokemonRepository.findAllByEstTireFalse().isEmpty() || !dateDerniereReinitialisation.equals(LocalDate.now())) {
+			resetPokemonTires();
+			dateDerniereReinitialisation = LocalDate.now();
+		}
+
+		List<Pokemon> pokemonsDisponibles = pokemonRepository.findAllByEstTireFalse();
 		if (pokemonsDisponibles.isEmpty()) {
 			throw new RuntimeException("Aucun Pokémon disponible pour le tirage !");
 		}
@@ -161,7 +168,7 @@ public class DresseurServiceImpl implements IDresseurService {
 		while (nouvellesCartes.size() < 5 && !pokemonsDisponibles.isEmpty()) {
 			Pokemon pokemonAleatoire = pokemonsDisponibles.get(random.nextInt(pokemonsDisponibles.size()));
 
-
+			// ✅ Marquer le Pokémon comme tiré et le sauvegarder
 			pokemonAleatoire.setEstTire(true);
 			pokemonRepository.save(pokemonAleatoire);
 
@@ -178,5 +185,16 @@ public class DresseurServiceImpl implements IDresseurService {
 		dresseurRepository.save(dresseur);
 
 		return new ArrayList<>(nouvellesCartes);
+	}
+
+	/**
+	 * ✅ Réinitialise les Pokémon tirés à zéro chaque jour.
+	 */
+	private void resetPokemonTires() {
+		List<Pokemon> allPokemons = pokemonRepository.findAll();
+		for (Pokemon pokemon : allPokemons) {
+			pokemon.setEstTire(false);
+		}
+		pokemonRepository.saveAll(allPokemons);
 	}
 }
