@@ -33,6 +33,20 @@ public class DresseurController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
+	@PatchMapping("/{uuid1}/echanger/{uuid2}")
+	public ResponseEntity<?> echangerCartes(
+			@PathVariable String uuid1,
+			@PathVariable String uuid2,
+			@RequestParam String carte1Uuid,
+			@RequestParam String carte2Uuid) {
+		try {
+			boolean success = dresseurService.echangerCartes(uuid1, uuid2, carte1Uuid, carte2Uuid);
+			return ResponseEntity.ok(success ? "Échange réussi !" : "Échange échoué.");
+		} catch (RuntimeException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
+
 	@PatchMapping("/{uuid}/tirer")
 	public ResponseEntity<List<Pokemon>> tirerCartes(@PathVariable String uuid) {
 		try {

@@ -11,17 +11,21 @@ public class Pokemon {
 	private String uuid;
 
 	private String nom;
-
 	private Integer niveau;
 
 	@Enumerated(EnumType.STRING)
 	private TypePokemon type;
 
 	private String attaque1;
-
 	private String attaque2;
-
 	private Integer rarete;
+
+	private boolean estTire = false; // ✅ Ajout du champ pour savoir si le Pokémon a déjà été tiré
+
+	// Getters et Setters
+	public String getUuid() {
+		return uuid;
+	}
 
 	public String getNom() {
 		return nom;
@@ -71,7 +75,11 @@ public class Pokemon {
 		this.rarete = rarete;
 	}
 
-	public String getUuid() {
-		return uuid;
+	public boolean isEstTire() {
+		return estTire;
+	}
+
+	public void setEstTire(boolean estTire) {
+		this.estTire = estTire;
 	}
 }
